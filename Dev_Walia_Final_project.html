@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Dev Walia (23205184)">
+
+<title>Data Prog R Final Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Dev_Walia_Final_project_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Dev_Walia_Final_project_files/libs/quarto-html/quarto.js"></script>
+<script src="Dev_Walia_Final_project_files/libs/quarto-html/popper.min.js"></script>
+<script src="Dev_Walia_Final_project_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Dev_Walia_Final_project_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Dev_Walia_Final_project_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Dev_Walia_Final_project_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Dev_Walia_Final_project_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Dev_Walia_Final_project_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Dev_Walia_Final_project_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Prog R Final Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Dev Walia (23205184) </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="stat30340-data-programming-with-r---final-project-by-dev-walia-23205184" class="level1">
+<h1>STAT30340 Data Programming with R - Final Project By Dev Walia (23205184)</h1>
+<section id="part-1-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-analysis">Part 1: Analysis</h2>
+<p>This task involves finding a dataset, that contains a mix of categorical (factors) and numerical variables. The task is to complete an analysis and write a report using Quarto on the data. The analysis of the data should involve the use of graphical summaries, tables and numerical summaries of the data.</p>
+<p><strong>Data Set Online Site:</strong> https://archive.ics.uci.edu/dataset/352/online+retail</p>
+<p>I have also attached the data set file with my code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)<span class="co"># Used for reshaping data (melt function)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'reshape2'
+
+The following object is masked from 'package:tidyr':
+
+    smiths</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)<span class="co"># Used for working with dates and times</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="loading-exploring-data-set--" class="level2">
+<h2 class="anchored" data-anchor-id="loading-exploring-data-set--"><strong>1. Loading &amp; Exploring Data Set :-</strong></h2>
+<section id="loading-the-online_retail.xlsx-dataset-which-i-found-onine-and-will-start-exploring-it" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-online_retail.xlsx-dataset-which-i-found-onine-and-will-start-exploring-it"><strong>Loading the “Online_Retail.xlsx” dataset which I found onine and will start exploring it:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"Online_Retail.xlsx"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+  InvoiceNo StockCode Description         Quantity InvoiceDate         UnitPrice
+  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                  &lt;dbl&gt; &lt;dttm&gt;                  &lt;dbl&gt;
+1 536365    85123A    WHITE HANGING HEAR…        6 2010-12-01 08:26:00      2.55
+2 536365    71053     WHITE METAL LANTERN        6 2010-12-01 08:26:00      3.39
+3 536365    84406B    CREAM CUPID HEARTS…        8 2010-12-01 08:26:00      2.75
+4 536365    84029G    KNITTED UNION FLAG…        6 2010-12-01 08:26:00      3.39
+5 536365    84029E    RED WOOLLY HOTTIE …        6 2010-12-01 08:26:00      3.39
+6 536365    22752     SET 7 BABUSHKA NES…        2 2010-12-01 08:26:00      7.65
+# ℹ 2 more variables: CustomerID &lt;dbl&gt;, Country &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explore the data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [541,909 × 8] (S3: tbl_df/tbl/data.frame)
+ $ InvoiceNo  : chr [1:541909] "536365" "536365" "536365" "536365" ...
+ $ StockCode  : chr [1:541909] "85123A" "71053" "84406B" "84029G" ...
+ $ Description: chr [1:541909] "WHITE HANGING HEART T-LIGHT HOLDER" "WHITE METAL LANTERN" "CREAM CUPID HEARTS COAT HANGER" "KNITTED UNION FLAG HOT WATER BOTTLE" ...
+ $ Quantity   : num [1:541909] 6 6 8 6 6 2 6 6 6 32 ...
+ $ InvoiceDate: POSIXct[1:541909], format: "2010-12-01 08:26:00" "2010-12-01 08:26:00" ...
+ $ UnitPrice  : num [1:541909] 2.55 3.39 2.75 3.39 3.39 7.65 4.25 1.85 1.85 1.69 ...
+ $ CustomerID : num [1:541909] 17850 17850 17850 17850 17850 ...
+ $ Country    : chr [1:541909] "United Kingdom" "United Kingdom" "United Kingdom" "United Kingdom" ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  InvoiceNo          StockCode         Description           Quantity        
+ Length:541909      Length:541909      Length:541909      Min.   :-80995.00  
+ Class :character   Class :character   Class :character   1st Qu.:     1.00  
+ Mode  :character   Mode  :character   Mode  :character   Median :     3.00  
+                                                          Mean   :     9.55  
+                                                          3rd Qu.:    10.00  
+                                                          Max.   : 80995.00  
+                                                                             
+  InvoiceDate                       UnitPrice           CustomerID    
+ Min.   :2010-12-01 08:26:00.00   Min.   :-11062.06   Min.   :12346   
+ 1st Qu.:2011-03-28 11:34:00.00   1st Qu.:     1.25   1st Qu.:13953   
+ Median :2011-07-19 17:17:00.00   Median :     2.08   Median :15152   
+ Mean   :2011-07-04 13:34:57.16   Mean   :     4.61   Mean   :15288   
+ 3rd Qu.:2011-10-19 11:27:00.00   3rd Qu.:     4.13   3rd Qu.:16791   
+ Max.   :2011-12-09 12:50:00.00   Max.   : 38970.00   Max.   :18287   
+                                                      NA's   :135080  
+   Country         
+ Length:541909     
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+                   </code></pre>
+</div>
+</div>
+</section>
+<section id="checking-the-data-shape-rows-and-columns" class="level3">
+<h3 class="anchored" data-anchor-id="checking-the-data-shape-rows-and-columns"><strong>Checking the Data shape (rows and columns):</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking data shape</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of rows:"</span>, <span class="fu">nrow</span>(data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of rows: 541909 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of columns:"</span>, <span class="fu">ncol</span>(data), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of columns: 8 </code></pre>
+</div>
+</div>
+</section>
+<section id="checking-for-any-duplicate-row" class="level3">
+<h3 class="anchored" data-anchor-id="checking-for-any-duplicate-row"><strong>Checking for any duplicate row:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for duplicates</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> data[<span class="fu">duplicated</span>(data), ]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of duplicate rows:"</span>, <span class="fu">nrow</span>(duplicates), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of duplicate rows: 5268 </code></pre>
+</div>
+</div>
+</section>
+<section id="now-we-can-see-our-data-set-which-we-found-online-fulfill-the-criteria-specified-in-the-guidelines.-lets-break-it-down" class="level3">
+<h3 class="anchored" data-anchor-id="now-we-can-see-our-data-set-which-we-found-online-fulfill-the-criteria-specified-in-the-guidelines.-lets-break-it-down"><strong>Now we can see our data set which we found online fulfill the criteria specified in the guidelines. Let’s break it down:</strong></h3>
+<p><strong>Categorical Variables:</strong></p>
+<ol type="1">
+<li><p><strong>InvoiceNo:</strong> An invoice number, represented by a 6-digit integral code assigned uniquely to each transaction. If the code begins with the letter ‘c’, it indicates a cancellation.</p></li>
+<li><p><strong>StockCode:</strong> A product (item) code, a 5-digit integral number assigned uniquely to each distinct product.</p></li>
+<li><p><strong>Description:</strong> The name of the product (item). This field is nominal.</p></li>
+<li><p><strong>CustomerID:</strong> Customer number, a 5-digit integral code assigned uniquely to each customer. This field is categorical.</p></li>
+</ol>
+<p><strong>Numerical Variables:</strong></p>
+<ol type="1">
+<li><p><strong>Quantity:</strong> The quantity of each product (item) per transaction, represented as a numeric value.</p></li>
+<li><p><strong>InvoiceDate:</strong> Date and time of the invoice, represented as a numeric value. It indicates the day and time when each transaction occurred.</p></li>
+<li><p><strong>UnitPrice:</strong> The unit price of the product, represented as a numeric value in sterling.</p></li>
+</ol>
+<p><strong>Other:</strong></p>
+<ul>
+<li><strong>Country:</strong> The name of the country where each customer resides. This field is categorical.</li>
+</ul>
+</section>
+</section>
+<section id="data-cleaning-eda--" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning-eda--"><strong>2. Data Cleaning &amp; EDA :-</strong></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking for duplicates if any present</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Print shape before dropping duplicates</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Shape before dropping duplicates: "</span>, <span class="fu">nrow</span>(data), <span class="st">" rows and "</span>, <span class="fu">ncol</span>(data), <span class="st">" columns</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape before dropping duplicates:  541909  rows and  8  columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop duplicate rows</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">!</span><span class="fu">duplicated</span>(data), ]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print shape after dropping duplicates</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Shape after dropping duplicates: "</span>, <span class="fu">nrow</span>(data), <span class="st">" rows and "</span>, <span class="fu">ncol</span>(data), <span class="st">" columns</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape after dropping duplicates:  536641  rows and  8  columns</code></pre>
+</div>
+</div>
+<p><strong>Note:</strong> 5268 duplicate rows dropped.</p>
+<section id="checking-data-shape-and-unique-values-in-different-columns" class="level3">
+<h3 class="anchored" data-anchor-id="checking-data-shape-and-unique-values-in-different-columns">Checking Data Shape and Unique Values in different columns:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking Data Shape</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Data Shape: "</span>, <span class="fu">nrow</span>(data), <span class="st">" rows and "</span>, <span class="fu">ncol</span>(data), <span class="st">" columns</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Data Shape:  536641  rows and  8  columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking Unique Values in Different Columns</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>columns_of_interest <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"InvoiceNo"</span>, <span class="st">"StockCode"</span>, <span class="st">"InvoiceDate"</span>, <span class="st">"CustomerID"</span>, <span class="st">"Country"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (col <span class="cf">in</span> columns_of_interest) {</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Unique Values for "</span>, col, <span class="st">" - "</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data[, col])), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Unique Values for  InvoiceNo  -  1 
+Unique Values for  StockCode  -  1 
+Unique Values for  InvoiceDate  -  1 
+Unique Values for  CustomerID  -  1 
+Unique Values for  Country  -  1 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking Nulls in CustomerID</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of nulls in CustomerID: "</span>, <span class="fu">sum</span>(<span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of nulls in CustomerID:  135037 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>percentage_missing <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sum</span>(<span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID)) <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">nrow</span>(data), <span class="dv">2</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Percentage of customers missing: "</span>, percentage_missing, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Percentage of customers missing:  25.16 %</code></pre>
+</div>
+</div>
+</section>
+<section id="verify-whether-there-are-instances-where-the-invoiceno-is-associated-with-a-null-customerid-and-whether-there-are-available-customerid-values-for-filling-those-nulls.-an-empty-data-frame-is-returned-indicating-no-such-cases.-the-code-snippet-identifies-unique-invoiceno-values-with-null-customerid-and-checks-if-they-exist-in-the-non-null-customerid-data-frame" class="level3">
+<h3 class="anchored" data-anchor-id="verify-whether-there-are-instances-where-the-invoiceno-is-associated-with-a-null-customerid-and-whether-there-are-available-customerid-values-for-filling-those-nulls.-an-empty-data-frame-is-returned-indicating-no-such-cases.-the-code-snippet-identifies-unique-invoiceno-values-with-null-customerid-and-checks-if-they-exist-in-the-non-null-customerid-data-frame"><strong>Verify whether there are instances where the <code>InvoiceNo</code> is associated with a null <code>CustomerID</code> and whether there are available <code>CustomerID</code> values for filling those nulls. An empty data frame is returned, indicating no such cases. The code snippet identifies unique <code>InvoiceNo</code> values with null <code>CustomerID</code> and checks if they exist in the non-null <code>CustomerID</code> data frame:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if InvoiceNo for Null CustomerID exists</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>null_id_invoices <span class="ot">&lt;-</span> <span class="fu">unique</span>(data<span class="sc">$</span>InvoiceNo[<span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID)])</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Invoices count with Null CustomerID: "</span>, <span class="fu">length</span>(null_id_invoices), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Invoices count with Null CustomerID:  3710 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if InvoiceNo in Null CustomerID dataframe exists in Non-Null CustomerID Dataframe</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>non_null_customers <span class="ot">&lt;-</span> data[<span class="sc">!</span><span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID), ]</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>invoices_in_non_null <span class="ot">&lt;-</span> non_null_customers[non_null_customers<span class="sc">$</span>InvoiceNo <span class="sc">%in%</span> null_id_invoices, ]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the resulting dataframe</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(invoices_in_non_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 8
+# ℹ 8 variables: InvoiceNo &lt;chr&gt;, StockCode &lt;chr&gt;, Description &lt;chr&gt;,
+#   Quantity &lt;dbl&gt;, InvoiceDate &lt;dttm&gt;, UnitPrice &lt;dbl&gt;, CustomerID &lt;dbl&gt;,
+#   Country &lt;chr&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>We can colnclude that, No such cases present as empty dataframe is returned.</strong></li>
+</ul>
+<p><strong>Note:</strong> Given the absence of customer IDs, it is presumed that these orders were not placed by customers already present in the dataset, as those customers already have assigned IDs. To avoid distorting insights derived from the data, the decision is made not to assign these orders to existing customers. Instead of removing rows with null customer IDs, which constitutes approximately 25% of the data, the approach is to assign a unique customer ID to each order based on the `InvoiceNo`. This will create a distinct customer for each unique order.</p>
+</section>
+<section id="verify-whether-each-invoiceno-has-a-distinct-mapping-with-customerid-allowing-the-assignment-of-each-invoiceno-associated-with-a-null-customerid-to-be-treated-as-a-new-customer" class="level3">
+<h3 class="anchored" data-anchor-id="verify-whether-each-invoiceno-has-a-distinct-mapping-with-customerid-allowing-the-assignment-of-each-invoiceno-associated-with-a-null-customerid-to-be-treated-as-a-new-customer"><strong>Verify whether each `InvoiceNo` has a distinct mapping with `CustomerID`, allowing the assignment of each `InvoiceNo` associated with a null `CustomerID` to be treated as a new customer:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if InvoiceNo has a unique mapping with CustomerID</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>invoice_customer_mapping <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(InvoiceNo) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">nunique =</span> <span class="fu">n_distinct</span>(CustomerID)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(nunique)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(invoice_customer_mapping)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  InvoiceNo nunique
+  &lt;chr&gt;       &lt;int&gt;
+1 536365          1
+2 536366          1
+3 536367          1
+4 536368          1
+5 536369          1</code></pre>
+</div>
+</div>
+<p><strong>After sorting in descending order, the data indicates that each `InvoiceNo` is associated with a maximum of 1 customer.</strong></p>
+</section>
+<section id="now-the-task-is-to-create-a-new-column-named-newid-and-assign-it-to-the-invoiceno-wherever-customerid-is-null" class="level3">
+<h3 class="anchored" data-anchor-id="now-the-task-is-to-create-a-new-column-named-newid-and-assign-it-to-the-invoiceno-wherever-customerid-is-null"><strong>Now, the task is to create a new column named ‘NewID’ and assign it to the `InvoiceNo` wherever `CustomerID` is null:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column 'NewID' in the dataset</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>NewID <span class="ot">&lt;-</span> data<span class="sc">$</span>CustomerID</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>NewID[<span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID)] <span class="ot">&lt;-</span> data<span class="sc">$</span>InvoiceNo[<span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID)]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove non-digit characters from the 'NewID' column</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>NewID <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">D+"</span>, <span class="st">""</span>, <span class="fu">as.character</span>(data<span class="sc">$</span>NewID))</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'NewID' to integer</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>NewID <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(data<span class="sc">$</span>NewID)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for common values between existing customer IDs and new IDs</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>customer_count <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>CustomerID))</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>null_invoice_count <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>InvoiceNo[<span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID)]))</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>new_id_count <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(data<span class="sc">$</span>NewID))</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of Customers:"</span>, customer_count, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of Customers: 4373 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of Orders where CustomerID is Null:"</span>, null_invoice_count, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of Orders where CustomerID is Null: 3710 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total Number of Customers and Orders where CustomerID is Null:"</span>, customer_count <span class="sc">+</span> null_invoice_count, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total Number of Customers and Orders where CustomerID is Null: 8083 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of New IDs:"</span>, new_id_count, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of New IDs: 8082 </code></pre>
+</div>
+</div>
+<p><strong>As the counts are equal, it indicates that distinct NewIDs were assigned to all unique orders lacking a customer ID, ensuring the absence of duplicates.</strong></p>
+</section>
+<section id="now-the-code-intends-to-convert-the-invoicedate-column-from-an-object-type-to-datetime-and-subsequently-examine-the-first-and-last-dates" class="level3">
+<h3 class="anchored" data-anchor-id="now-the-code-intends-to-convert-the-invoicedate-column-from-an-object-type-to-datetime-and-subsequently-examine-the-first-and-last-dates"><strong>Now, the code intends to convert the ‘InvoiceDate’ column from an object type to datetime and subsequently examine the first and last dates:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'InvoiceDate' to datetime in R</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>InvoiceDate <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(data<span class="sc">$</span>InvoiceDate, <span class="at">origin=</span><span class="st">"1970-01-01"</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print minimum and maximum Invoice Dates in a human-readable format</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Minimum Invoice Date: "</span>, <span class="fu">format</span>(<span class="fu">min</span>(data<span class="sc">$</span>InvoiceDate), <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Minimum Invoice Date:  2010-12-01 08:26:00 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Maximum Invoice Date: "</span>, <span class="fu">format</span>(<span class="fu">max</span>(data<span class="sc">$</span>InvoiceDate), <span class="st">"%Y-%m-%d %H:%M:%S"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maximum Invoice Date:  2011-12-09 12:50:00 </code></pre>
+</div>
+</div>
+<p><strong>The dataset spans a year, from December 1, 2010, to December 9, 2011, offering a detailed temporal snapshot of business transactions. With precise timestamps for each invoice, the data is well-suited for uncovering temporal patterns and trends, aiding analyses such as seasonality or monthly variations. The concise one-year duration establishes a clear temporal scope for insightful time-series examinations.</strong></p>
+</section>
+<section id="creating-a-column-named-cancellations-based-on-the-criterion-that-an-order-is-considered-a-cancellation-if-its-invoiceno-starts-with-the-letter-c" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-column-named-cancellations-based-on-the-criterion-that-an-order-is-considered-a-cancellation-if-its-invoiceno-starts-with-the-letter-c"><strong>Creating a column named ‘cancellations’ based on the criterion that an order is considered a cancellation if its ‘InvoiceNo’ starts with the letter ‘C’:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding a 'cancellations' column</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>cancellations <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"^C"</span>, data<span class="sc">$</span>InvoiceNo), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating and printing the number and percentage of cancelled products data</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>total_data <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>cancelled_data <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>cancellations <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Number of cancelled products data: "</span>, cancelled_data, cancelled_data <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> total_data, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of cancelled products data:  9251 1.723871 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing descriptive statistics for cancelled products data</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Summary statistics for cancelled products data:</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary statistics for cancelled products data:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(data[data<span class="sc">$</span>cancellations <span class="sc">==</span> <span class="dv">1</span>, ]<span class="sc">$</span>Quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-80995.00     -6.00     -2.00    -29.79     -1.00     -1.00 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing cancellations since they have negative quantities and make up only ~2% of data</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[data<span class="sc">$</span>cancellations <span class="sc">==</span> <span class="dv">0</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>This indicates that the quantity becomes negative when an order is canceled. The decision is made to exclude cancellation data from the dataset, given that cancellations constitute only a small portion, approximately 2%, of the entire dataset.</strong></p>
+</section>
+</section>
+<section id="numerical-analysis-for-unit-price" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-analysis-for-unit-price">3. Numerical Analysis for Unit Price:</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print minimum and maximum UnitPrice</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Minimum UnitPrice: "</span>, <span class="fu">min</span>(data<span class="sc">$</span>UnitPrice), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Minimum UnitPrice:  -11062.06 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Maximum UnitPrice: "</span>, <span class="fu">max</span>(data<span class="sc">$</span>UnitPrice), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maximum UnitPrice:  13541.33 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display summary statistics for UnitPrice</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(data<span class="sc">$</span>UnitPrice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
+-11062.060      1.250      2.080      3.862      4.130  13541.330 </code></pre>
+</div>
+</div>
+<p>The dataset’s unit prices exhibit a wide range, from a minimum of -11062.06 to a maximum of 13541.33. The distribution is positively skewed, with a mean unit price of 3.862. Most prices fall within the range of 1.250 (1st quartile) to 4.130 (3rd quartile). The presence of negative unit prices suggests anomalies or possibly refunds, warranting further investigation.</p>
+<section id="filtering-the-data-checking-where-the-unit-price-is-less-than-zero" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-the-data-checking-where-the-unit-price-is-less-than-zero"><strong>Filtering the Data (Checking where the Unit Price is less than zero):</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter rows where UnitPrice is less than 0</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>negative_unit_price_data <span class="ot">&lt;-</span> data[data<span class="sc">$</span>UnitPrice <span class="sc">&lt;</span> <span class="dv">0</span>, ]</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the filtered data</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(negative_unit_price_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 10
+  InvoiceNo StockCode Description     Quantity InvoiceDate         UnitPrice
+  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;              &lt;dbl&gt; &lt;dttm&gt;                  &lt;dbl&gt;
+1 A563186   B         Adjust bad debt        1 2011-08-12 14:51:00   -11062.
+2 A563187   B         Adjust bad debt        1 2011-08-12 14:52:00   -11062.
+# ℹ 4 more variables: CustomerID &lt;dbl&gt;, Country &lt;chr&gt;, NewID &lt;int&gt;,
+#   cancellations &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="removing-these-two-cases-where-unitprice-is-less-than-0" class="level3">
+<h3 class="anchored" data-anchor-id="removing-these-two-cases-where-unitprice-is-less-than-0"><strong>Removing these two cases where UnitPrice is less than 0:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter rows where UnitPrice is greater than or equal to 0</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[data<span class="sc">$</span>UnitPrice <span class="sc">&gt;=</span> <span class="dv">0</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculating-all-the-rows-where-price-0" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-all-the-rows-where-price-0"><strong>Calculating all the rows where Price == 0:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the percentage of data with Price = 0</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>percentage_zero_price <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sum</span>(data<span class="sc">$</span>UnitPrice <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">*</span> <span class="dv">100</span> <span class="sc">/</span> <span class="fu">nrow</span>(data), <span class="dv">2</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"% of data with Price = 0: "</span>, percentage_zero_price, <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>% of data with Price = 0:  0.48 %</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the count of unique Customer ID values where UnitPrice is 0</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>unique_customer_ids <span class="ot">&lt;-</span> <span class="fu">unique</span>(data[data<span class="sc">$</span>UnitPrice <span class="sc">==</span> <span class="dv">0</span>, ]<span class="sc">$</span>CustomerID)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Count of unique Customer ID values: "</span>, <span class="fu">length</span>(unique_customer_ids), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Count of unique Customer ID values:  32 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows where UnitPrice is 0 and CustomerID is not null</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data[data<span class="sc">$</span>UnitPrice <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(data<span class="sc">$</span>CustomerID), ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 40 × 10
+   InvoiceNo StockCode Description        Quantity InvoiceDate         UnitPrice
+   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                 &lt;dbl&gt; &lt;dttm&gt;                  &lt;dbl&gt;
+ 1 537197    22841     ROUND CAKE TIN VI…        1 2010-12-05 14:02:00         0
+ 2 539263    22580     ADVENT CALENDAR G…        4 2010-12-16 14:36:00         0
+ 3 539722    22423     REGENCY CAKESTAND…       10 2010-12-21 13:45:00         0
+ 4 540372    22090     PAPER BUNTING RET…       24 2011-01-06 16:41:00         0
+ 5 540372    22553     PLASTERS IN TIN S…       24 2011-01-06 16:41:00         0
+ 6 541109    22168     ORGANISER WOOD AN…        1 2011-01-13 15:10:00         0
+ 7 543599    84535B    FAIRY CAKES NOTEB…       16 2011-02-10 13:08:00         0
+ 8 547417    22062     CERAMIC BOWL WITH…       36 2011-03-23 10:25:00         0
+ 9 548318    22055     MINI CAKE STAND  …        5 2011-03-30 12:45:00         0
+10 548871    22162     HEART GARLAND RUS…        2 2011-04-04 14:42:00         0
+# ℹ 30 more rows
+# ℹ 4 more variables: CustomerID &lt;dbl&gt;, Country &lt;chr&gt;, NewID &lt;int&gt;,
+#   cancellations &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="dropping-the-cases-where-unitprice-0" class="level3">
+<h3 class="anchored" data-anchor-id="dropping-the-cases-where-unitprice-0"><strong>Dropping the cases where UnitPrice == 0:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop cases where UnitPrice is equal to 0</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>data_filtered <span class="ot">&lt;-</span> data[data<span class="sc">$</span>UnitPrice <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Display descriptive statistics for UnitPrice</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(data_filtered<span class="sc">$</span>UnitPrice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+    0.001     1.250     2.080     3.923     4.130 13541.330 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print minimum and maximum Quantity</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Minimum Quantity: "</span>, <span class="fu">min</span>(data_filtered<span class="sc">$</span>Quantity), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Minimum Quantity:  1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Maximum Quantity: "</span>, <span class="fu">max</span>(data_filtered<span class="sc">$</span>Quantity), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maximum Quantity:  80995 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display descriptive statistics for Quantity</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(data_filtered<span class="sc">$</span>Quantity))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+    1.00     1.00     4.00    10.62    11.00 80995.00 </code></pre>
+</div>
+</div>
+<p>The dataset’s quantity values vary widely, ranging from a minimum of 1 to an unusually high maximum of 80995. The distribution is positively skewed, as indicated by a mean quantity of 10.62. The majority of transactions fall within the lower quartiles, with the 1st quartile at 1.00 and the 3rd quartile at 11.00. The presence of an exceptionally high maximum value, 80995, suggests potential outliers or bulk purchases, highlighting the need for further investigation into these instances.</p>
+</section>
+<section id="correlation-analysis-between-quantity-unit-price" class="level3">
+<h3 class="anchored" data-anchor-id="correlation-analysis-between-quantity-unit-price"><strong>Correlation Analysis between Quantity &amp; Unit Price:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>correlation_matrix <span class="ot">&lt;-</span> <span class="fu">cor</span>(data[, <span class="fu">c</span>(<span class="st">"Quantity"</span>, <span class="st">"UnitPrice"</span>)], <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(correlation_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Quantity    UnitPrice
+Quantity   1.000000000 -0.003476562
+UnitPrice -0.003476562  1.000000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation of correlation</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Correlation between Quantity and UnitPrice:"</span>, correlation_matrix[<span class="dv">1</span>, <span class="dv">2</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Correlation between Quantity and UnitPrice: -0.003476562 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Interpretation: There is a negative correlation between Quantity and UnitPrice, suggesting that as the quantity increases, the unit price tends to decrease."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Interpretation: There is a negative correlation between Quantity and UnitPrice, suggesting that as the quantity increases, the unit price tends to decrease.</code></pre>
+</div>
+</div>
+<p>The correlation analysis reveals a negligible negative correlation coefficient of approximately -0.0035 between Quantity and UnitPrice. This suggests a minimal linear relationship between the two variables. The interpretation indicates that, on average, as the quantity of products increases, there is a slight tendency for the unit price to decrease. However, the correlation is close to zero, implying that the relationship is weak and not practically significant. This insight can guide further investigation into the factors influencing the pricing strategy or customer behavior with varying quantities.</p>
+</section>
+</section>
+<section id="graphical-summary" class="level2">
+<h2 class="anchored" data-anchor-id="graphical-summary">4. Graphical Summary:</h2>
+<section id="boxplot-of-revenue-by-the-top-6-countries" class="level3">
+<h3 class="anchored" data-anchor-id="boxplot-of-revenue-by-the-top-6-countries">Boxplot of Revenue by the top 6 countries:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting the top 6 countries by total revenue</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>top_countries <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Country) <span class="sc">%&gt;%</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Revenue =</span> <span class="fu">sum</span>(UnitPrice <span class="sc">*</span> Quantity)) <span class="sc">%&gt;%</span></span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Revenue)) <span class="sc">%&gt;%</span></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering data for the top 6 countries</span></span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>data_top6 <span class="ot">&lt;-</span> data[data<span class="sc">$</span>Country <span class="sc">%in%</span> top_countries<span class="sc">$</span>Country, ]</span>
+<span id="cb84-10"><a href="#cb84-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-11"><a href="#cb84-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot of Revenue by the top 6 countries</span></span>
+<span id="cb84-12"><a href="#cb84-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_top6, <span class="fu">aes</span>(<span class="at">x =</span> Country, <span class="at">y =</span> UnitPrice <span class="sc">*</span> Quantity, <span class="at">fill =</span> Country)) <span class="sc">+</span></span>
+<span id="cb84-13"><a href="#cb84-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb84-14"><a href="#cb84-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Boxplot of Revenue by Top 6 Countries"</span>,</span>
+<span id="cb84-15"><a href="#cb84-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Country"</span>,</span>
+<span id="cb84-16"><a href="#cb84-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Revenue"</span>) <span class="sc">+</span></span>
+<span id="cb84-17"><a href="#cb84-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb84-18"><a href="#cb84-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The boxplot of revenue by the top 6 countries (United Kingdom, Netherlands, Germany, France, EIRE, and Australia) provides a succinct visual summary of the distribution of total revenue generated from product sales in each country. Here are the key findings:</p>
+<p><strong>United Kingdom Dominance:</strong> The plot underscores the dominance of the United Kingdom in terms of total revenue, as indicated by the wider interquartile range and potential outliers. The box for the UK is generally larger and spans a higher range of revenue values compared to the other countries.</p>
+<p><strong>Variability Across Countries:</strong> The variability in revenue distribution is visually apparent, with each country exhibiting a distinct boxplot shape. This suggests variations in purchasing behaviors, market sizes, or product preferences among the top 6 countries.</p>
+<p><strong>Outliers Detection:</strong> Outliers, represented by points outside the whiskers of the boxplots, may signify exceptional transactions or unique purchasing patterns. Outliers in the UK, for instance, could indicate large transactions contributing significantly to total revenue.</p>
+<p>In summary, this boxplot effectively communicates the revenue distribution and highlights the prominence of the United Kingdom within the top 6 countries, providing valuable insights for strategic decision-making.</p>
+</section>
+<section id="histograms-for-the-numerical-variables" class="level3">
+<h3 class="anchored" data-anchor-id="histograms-for-the-numerical-variables">Histograms for the Numerical Variables:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histograms for Numerical Variables</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(InvoiceDate) <span class="sc">%&gt;%</span></span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">fill =</span> <span class="st">"#fc8d62"</span>, <span class="at">bins =</span> <span class="dv">20</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>key, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Numerical Variables"</span>,</span>
+<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Value"</span>,</span>
+<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb85-11"><a href="#cb85-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The histograms for the `InvoiceDate` variable reveal insightful patterns in the temporal distribution of transactions. Here are key findings:</p>
+<p><strong>Temporal Concentrations:</strong> Peaks in the histograms indicate periods of heightened transactional activity. These concentration points correspond to Dec 2011 where frequency is above 4000.</p>
+<p><strong>Temporal Trends:</strong> The overall shape of the histograms may unveil temporal trends, such as seasonality or recurring patterns. Observing fluctuations in frequency over time provides valuable insights into the temporal dynamics of the business. Lowest drop in Jan 2011.</p>
+<p><strong>Distribution Spread:</strong> Examining the spread of the histograms helps gauge the variability in transactional frequency. A wider spread may indicate a more evenly distributed temporal presence.</p>
+<p>In essence, these histograms serve as a visual exploration of the temporal landscape within the dataset, offering analysts a nuanced understanding of when transactions tend to occur more frequently, less frequently, or exhibit distinct patterns over time.</p>
+</section>
+<section id="revenue-distribution-by-product-description" class="level3">
+<h3 class="anchored" data-anchor-id="revenue-distribution-by-product-description"><strong>Revenue Distribution by Product Description:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 product descriptions by total revenue</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>top_products <span class="ot">&lt;-</span> data_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Description) <span class="sc">%&gt;%</span></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Revenue =</span> <span class="fu">sum</span>(UnitPrice <span class="sc">*</span> Quantity)) <span class="sc">%&gt;%</span></span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Revenue)) <span class="sc">%&gt;%</span></span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering data for the top 10 products</span></span>
+<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>data_top_products <span class="ot">&lt;-</span> data_filtered[data_filtered<span class="sc">$</span>Description <span class="sc">%in%</span> top_products<span class="sc">$</span>Description, ]</span>
+<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot of Total Revenue by Product Description</span></span>
+<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_products, <span class="fu">aes</span>(<span class="at">x =</span> Description, <span class="at">y =</span> Total_Revenue, <span class="at">fill =</span> Description)) <span class="sc">+</span></span>
+<span id="cb86-13"><a href="#cb86-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb86-14"><a href="#cb86-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Total Revenue by Top 10 Products"</span>,</span>
+<span id="cb86-15"><a href="#cb86-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Product Description"</span>,</span>
+<span id="cb86-16"><a href="#cb86-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Total Revenue"</span>) <span class="sc">+</span></span>
+<span id="cb86-17"><a href="#cb86-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb86-18"><a href="#cb86-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb86-19"><a href="#cb86-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Findings:</strong></p>
+<ul>
+<li><p>The boxplot visually compares the revenue distribution for the top 10 products, providing insights into the variability of sales. Analyzing top revenue generators can inform understanding of customer preferences and guide future product offerings or promotions.</p></li>
+<li><p>Products Dotcom Postage, Cakestand and Paper Craft, Little Birdge are standout performers, contributing significantly to total revenue. Notable variations in revenue exist among the top 10 products, offering insights for strategic decision-making.</p></li>
+<li><p>Products with lower revenue present opportunities for targeted improvements, potentially through marketing initiatives. Assess seasonal trends to optimize strategies and inventory management throughout the year.</p></li>
+</ul>
+</section>
+<section id="time-series-analysis-for-the-invoice-data" class="level3">
+<h3 class="anchored" data-anchor-id="time-series-analysis-for-the-invoice-data">Time Series Analysis for the Invoice Data:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Time Series Analysis</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>InvoiceDate <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(data<span class="sc">$</span>InvoiceDate, <span class="at">origin =</span> <span class="st">"1970-01-01"</span>, <span class="at">tz =</span> <span class="st">"UTC"</span>)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> InvoiceDate, <span class="at">y =</span> Quantity)) <span class="sc">+</span></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"#8da0cb"</span>) <span class="sc">+</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Time Series Analysis of Quantity"</span>,</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Invoice Date"</span>,</span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Quantity"</span>) <span class="sc">+</span></span>
+<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The time series analysis of quantity over the dataset’s timeline reveals dynamic patterns in transactional quantities. The line plot depicts fluctuations in quantities over time, providing insights into trends and variations. Peaks and troughs in the time series suggest periods of increased and decreased transactional activity, respectively. The visualization is instrumental in identifying potential seasonality, trend shifts, or notable events influencing the quantity of products transacted.</p>
+<p>The observed spikes and fluctuations in the time series analysis of transactional quantities can be indicative of various underlying factors influencing the business. In January 2011 and October 2011, the noticeable spikes might suggest heightened purchasing activity during specific periods. These peaks could be associated with seasonal trends, promotional events, or other external factors that attract increased customer engagement and lead to a surge in transaction quantities.</p>
+<p>On the other hand, the negative spikes around June 2011 and April 2011 could signal periods of reduced transactional activity or even instances of product returns or cancellations. A negative spike typically implies a decrease in the quantity of products transacted, possibly due to factors such as economic conditions, operational challenges, or specific events impacting customer behavior negatively.</p>
+<p><strong><em>FINAL FINDINGS:</em></strong></p>
+<p><strong><em>In conclusion, the analysis of the online retail dataset uncovered valuable insights into the company’s operations and customer behavior. The dataset spans a year, from December 1, 2010, to December 9, 2011, providing a detailed temporal snapshot of business transactions. Notably, the dominance of the United Kingdom in terms of total revenue was evident, with wider interquartile ranges and potential outliers highlighting the UK’s significant contribution. The scatter plot of Quantity vs UnitPrice for the top 6 countries revealed diverse purchasing patterns, while the time series analysis showcased dynamic fluctuations in transactional quantities, offering a comprehensive view of temporal trends.</em></strong></p>
+<p><strong><em>Furthermore, the exploratory data analysis addressed data quality concerns, including the handling of cancellations and the assignment of unique customer IDs to orders with null IDs. The removal of duplicates, thorough data cleaning, and the exclusion of cancellations with negative quantities ensured the integrity of subsequent analyses. The identification of outliers, such as exceptionally high quantities and negative unit prices, prompted further investigation into potential anomalies or bulk purchases. Overall, this analysis equips stakeholders with actionable insights to inform strategic decision-making and improve business performance.</em></strong></p>
+<p>-----------------------------------------------------------------------------------------------</p>
+</section>
+</section>
+<section id="part-2-r-package" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-r-package">Part 2: R Package</h2>
+<section id="this-task-involves-finding-an-existing-r-package-that-we-didnt-use-in-the-course-and-write-a-report-demonstrating-its-use-using-quarto.-the-report-should-demonstrate-some-of-the-key-functionality-of-the-package-but-doesnt-need-to-demonstrate-all-of-the-functions-only-the-main-ones." class="level3">
+<h3 class="anchored" data-anchor-id="this-task-involves-finding-an-existing-r-package-that-we-didnt-use-in-the-course-and-write-a-report-demonstrating-its-use-using-quarto.-the-report-should-demonstrate-some-of-the-key-functionality-of-the-package-but-doesnt-need-to-demonstrate-all-of-the-functions-only-the-main-ones.">This task involves finding an existing R package, that we didn’t use in the course, and write a report demonstrating its use using Quarto. The report should demonstrate some of the key functionality of the package, but doesn’t need to demonstrate all of the functions (only the main ones).</h3>
+</section>
+</section>
+<section id="exploring-the-caret-package" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-the-caret-package"><strong>Exploring the Caret Package:</strong></h2>
+<p>I will be using the Caret Package for this specific task with my part 1 dataset .</p>
+</section>
+<section id="purpose-of-the-caret-package" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-the-caret-package"><strong>Purpose of the caret Package</strong></h2>
+<p>The caret package, which stands for Classification And REgression Training, streamlines the model training process for complex regression and classification problems in R. Instead of loading all necessary packages at startup, caret loads them as needed, aiming to reduce startup time.</p>
+<p>The package “suggests” 32 additional packages but doesn’t make them formal dependencies. If a required modeling package is missing, caret prompts the user to install it.</p>
+<p>The <strong>caret</strong> package is a comprehensive framework for streamlining the process of building and evaluating predictive models in R.</p>
+<p>Its primary purpose is to provide a unified interface for various machine learning algorithms, making it easier for users to train models, conduct resampling, and assess performance metrics.</p>
+</section>
+<section id="functionality-demonstration" class="level2">
+<h2 class="anchored" data-anchor-id="functionality-demonstration"><strong>Functionality Demonstration:</strong></h2>
+<section id="loading-necessary-libraries-and-data" class="level3">
+<h3 class="anchored" data-anchor-id="loading-necessary-libraries-and-data"><strong>1. Loading Necessary Libraries and Data:</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary library</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'caret'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    lift</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-a-new-variable-totalrevenue" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-new-variable-totalrevenue"><strong>2. Creating a New Variable ‘TotalRevenue’</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new variable 'TotalRevenue'</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>TotalRevenue <span class="ot">&lt;-</span> data<span class="sc">$</span>Quantity <span class="sc">*</span> data<span class="sc">$</span>UnitPrice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-preparation-and-splitting" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation-and-splitting"><strong>3. Data Preparation and Splitting</strong></h3>
+<p>The following key functions from the <strong><code>caret</code></strong> package are employed:</p>
+<ul>
+<li><strong><code>createDataPartition</code></strong>: Used to efficiently split the dataset into training and testing sets, facilitating model evaluation.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed for reproducibility</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the features and target variable</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>features <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Quantity"</span>, <span class="st">"UnitPrice"</span>)  </span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>target_variable <span class="ot">&lt;-</span> <span class="st">"TotalRevenue"</span></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with only the selected features and target</span></span>
+<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data[, <span class="fu">c</span>(features, target_variable), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and testing sets using caret function "createDataPartition"</span></span>
+<span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a>set_index <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(data_subset<span class="sc">$</span>TotalRevenue, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> data_subset[set_index, ]</span>
+<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> data_subset[<span class="sc">-</span>set_index, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The following key functions from the <strong><code>caret</code></strong> package are employed:</p>
+<ul>
+<li><p><strong><code>train</code></strong>: Employed for model training, specifying a linear regression method, and incorporating cross-validation for robust performance assessment.</p></li>
+<li><p><strong><code>trainControl</code></strong>: Integrated as an argument within the <strong><code>train</code></strong> function to define the resampling strategy, in this case, employing a 5-fold cross-validation.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model using caret's train and trainControl function</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  TotalRevenue <span class="sc">~</span> .,</span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> train_data,</span>
+<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"lm"</span>,  <span class="co"># Linear regression</span></span>
+<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, <span class="at">number =</span> <span class="dv">5</span>)</span>
+<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summarizing-model-results" class="level3">
+<h3 class="anchored" data-anchor-id="summarizing-model-results"><strong>5. Summarizing Model Results</strong></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the results</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = .outcome ~ ., data = dat)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-34159     -3     -2      3  46954 
+
+Coefficients:
+            Estimate Std. Error  t value Pr(&gt;|t|)    
+(Intercept) 0.664196   0.206700    3.213  0.00131 ** 
+Quantity    1.500248   0.001154 1300.074  &lt; 2e-16 ***
+UnitPrice   1.056590   0.005246  201.410  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 133.4 on 421909 degrees of freedom
+Multiple R-squared:  0.8039,    Adjusted R-squared:  0.8039 
+F-statistic: 8.646e+05 on 2 and 421909 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="making-predictions-and-evaluating-performance" class="level3">
+<h3 class="anchored" data-anchor-id="making-predictions-and-evaluating-performance"><strong>6. Making Predictions and Evaluating Performance:</strong></h3>
+<p>The following key functions from the <strong><code>caret</code></strong> package are employed:</p>
+<ul>
+<li><p><strong><code>predict</code></strong>: Applied to generate predictions on the test dataset using the trained linear regression model.</p></li>
+<li><p><strong><code>sqrt</code> and <code>mean</code></strong>: Employed for the calculation of the Root Mean Squared Error (RMSE), serving as a metric for evaluating the model’s predictive accuracy.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set using caret function "predict"</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> test_data)</span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the model performance using caret function sqrt and mean</span></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a>rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((predictions <span class="sc">-</span> test_data<span class="sc">$</span>TotalRevenue)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb97-6"><a href="#cb97-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Root Mean Squared Error (RMSE):"</span>, rmse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Root Mean Squared Error (RMSE): 54.7996329485646"</code></pre>
+</div>
+</div>
+<p>The Root Mean Squared Error (RMSE) obtained from the caret package is approximately 54.8, indicating the average disparity between predicted and actual Total Revenue values in the test set. A lower RMSE generally signifies better model performance, and in this context, it implies that, on average, the model’s predictions deviate by around $54.8 from the true values. The RMSE result serves as a quantitative measure of the model’s predictive accuracy, aiding in the assessment of its practical utility and guiding potential improvements for enhanced forecasting precision.</p>
+<p><strong><em>The caret package facilitates streamlined model development, offering a unified framework for various machine learning tasks, including preprocessing, training, and evaluation. Its advantage lies in providing a consistent interface across different algorithms, simplifying the model selection and tuning process, and enabling efficient comparison of multiple models.</em></strong></p>
+<p>--------------------------------------------------------------------------------</p>
+</section>
+</section>
+<section id="part-3-functions-programming" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-functions-programming">Part 3: Functions/ Programming</h2>
+<p><strong>This task is to write an R function (or set of functions) that can be used to provide a statistical analysis of interest. We will be creating the Function to perform Linear Regression analysis by fitting the model and will be creating S3 class for the results.</strong></p>
+<section id="function-for-linear-regression-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="function-for-linear-regression-analysis"><strong>1. Function for Linear Regression Analysis:</strong></h3>
+<ul>
+<li><p>The <strong><code>linear_regression_analysis</code></strong> function takes a dataset, a response variable, and predictor variables as inputs.</p></li>
+<li><p>It checks if the required packages are installed and if the specified columns are present in the dataset.</p></li>
+<li><p>The function then fits a linear regression model using the specified variables and returns an S3 object of class “linear_regression_result.”</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to perform linear regression analysis</span></span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>linear_regression_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(data, response_var, predictor_vars) {</span>
+<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if the required packages are installed</span></span>
+<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"stats"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Package 'stats' not installed. Please install it."</span>)</span>
+<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-8"><a href="#cb99-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if the required columns are present in the dataset</span></span>
+<span id="cb99-9"><a href="#cb99-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>(response_var <span class="sc">%in%</span> <span class="fu">names</span>(data) <span class="sc">&amp;&amp;</span> <span class="fu">all</span>(predictor_vars <span class="sc">%in%</span> <span class="fu">names</span>(data)))) {</span>
+<span id="cb99-10"><a href="#cb99-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Invalid column names provided."</span>)</span>
+<span id="cb99-11"><a href="#cb99-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb99-12"><a href="#cb99-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-13"><a href="#cb99-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Fit the linear regression model</span></span>
+<span id="cb99-14"><a href="#cb99-14" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">formula</span>(<span class="fu">paste</span>(response_var, <span class="st">"~"</span>, <span class="fu">paste</span>(predictor_vars, <span class="at">collapse =</span> <span class="st">" + "</span>))), data)</span>
+<span id="cb99-15"><a href="#cb99-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-16"><a href="#cb99-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an S3 class for the results</span></span>
+<span id="cb99-17"><a href="#cb99-17" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb99-18"><a href="#cb99-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> model,</span>
+<span id="cb99-19"><a href="#cb99-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data,</span>
+<span id="cb99-20"><a href="#cb99-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">response_var =</span> response_var,</span>
+<span id="cb99-21"><a href="#cb99-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">predictor_vars =</span> predictor_vars</span>
+<span id="cb99-22"><a href="#cb99-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb99-23"><a href="#cb99-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb99-24"><a href="#cb99-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">class</span>(result) <span class="ot">&lt;-</span> <span class="st">"linear_regression_result"</span></span>
+<span id="cb99-25"><a href="#cb99-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-26"><a href="#cb99-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb99-27"><a href="#cb99-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="s3-class-and-methods" class="level3">
+<h3 class="anchored" data-anchor-id="s3-class-and-methods"><strong>2. S3 Class and Methods:</strong></h3>
+<ul>
+<li><p>We defined an S3 class named “linear_regression_result” to encapsulate the results of the linear regression analysis.</p></li>
+<li><p>The <strong><code>print</code></strong>, <strong><code>summary</code></strong>, and <strong><code>plot</code></strong> methods were implemented for this class to provide different perspectives on the analysis results.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define print method for the result</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>print.linear_regression_result <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Linear Regression Results Intercepts and Coefficients:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Intercept:"</span>, <span class="fu">coef</span>(x<span class="sc">$</span>model)[<span class="dv">1</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Coefficient (wt):"</span>, <span class="fu">coef</span>(x<span class="sc">$</span>model)[<span class="dv">2</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Coefficient (hp):"</span>, <span class="fu">coef</span>(x<span class="sc">$</span>model)[<span class="dv">3</span>], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define summary method for the result</span></span>
+<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a>summary.linear_regression_result <span class="ot">&lt;-</span> <span class="cf">function</span>(object, ...) {</span>
+<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Summary of Linear Regression Results:</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(object<span class="sc">$</span>model))</span>
+<span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb100-14"><a href="#cb100-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-15"><a href="#cb100-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Define plot method for the result</span></span>
+<span id="cb100-16"><a href="#cb100-16" aria-hidden="true" tabindex="-1"></a>plot.linear_regression_result <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ...) {</span>
+<span id="cb100-17"><a href="#cb100-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(x<span class="sc">$</span>model, <span class="at">main =</span> <span class="st">"Linear Regression Plot"</span>)</span>
+<span id="cb100-18"><a href="#cb100-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-usage" class="level3">
+<h3 class="anchored" data-anchor-id="example-usage"><strong>3. Example Usage:</strong></h3>
+<ul>
+<li><p>We demonstrated the usage of the function with the <strong><code>mtcars</code></strong> dataset, predicting miles per gallon (<strong><code>mpg</code></strong>) based on vehicle weight (<strong><code>wt</code></strong>) and horsepower (<strong><code>hp</code></strong>).</p></li>
+<li><p>The <strong><code>summary</code></strong> method provides a summary of the linear regression results.</p></li>
+<li><p>The <strong><code>print</code></strong> method displays detailed information about the linear regression model.</p></li>
+<li><p>The <strong><code>plot</code></strong> method generates a plot of the fitted values against the observed values.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+</div>
+</div>
+<p>The <strong><code>linear_regression_analysis</code></strong> function is utilized to fit a linear regression model to the specified dataset and variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">linear_regression_analysis</span>(mtcars, <span class="st">"mpg"</span>, <span class="fu">c</span>(<span class="st">"wt"</span>, <span class="st">"hp"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The resulting object, ‘result,’ is an instance of the “linear_regression_result” class, encapsulating the model, dataset, response variable, and predictor variables. This structured approach allows for easy access to and manipulation of the linear regression results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the detailed results</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear Regression Results Intercepts and Coefficients:
+Intercept: 37.22727 
+Coefficient (wt): -3.877831 
+Coefficient (hp): -0.03177295 </code></pre>
+</div>
+</div>
+<p><strong>The results are encapsulated in an S3 class, “linear_regression_result,” with print, summary, and plot methods defined for meaningful output.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Printing the more detailed summary</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Summary of Linear Regression Results:
+
+Call:
+lm(formula = formula(paste(response_var, "~", paste(predictor_vars, 
+    collapse = " + "))), data = data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-3.941 -1.600 -0.182  1.050  5.854 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 37.22727    1.59879  23.285  &lt; 2e-16 ***
+wt          -3.87783    0.63273  -6.129 1.12e-06 ***
+hp          -0.03177    0.00903  -3.519  0.00145 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.593 on 29 degrees of freedom
+Multiple R-squared:  0.8268,    Adjusted R-squared:  0.8148 
+F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
+</div>
+</div>
+<p>The linear regression analysis indicates a strong and statistically significant model. The intercept is 37.23, and both ‘wt’ and ‘hp’ are significant predictors with coefficients of -3.88 and -0.03, respectively. The model explains approximately 83% of the variability in the response variable (‘Multiple R-squared: 0.8268’).</p>
+<p>The F-statistic is 69.21, indicating overall statistical significance. The residual standard error is 2.59, reflecting the variability unexplained by the predictors. In summary, the model provides valuable insights into the relationship between the response variable and predictors, suggesting a robust fit and significant predictor variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results of our linear regression function</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-38-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="Dev_Walia_Final_project_files/figure-html/unnamed-chunk-38-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong><em>In a nutshell the <code>print</code> method displays a concise summary of coefficients the linear regression results, while the <code>summary</code> method provides a more detailed summary. Additionally, a <code>plot</code> method generates a plot of the regression analysis.This task showcases a structured and modular approach to performing linear regression analysis in R, making it easy for users to understand and utilize the provided functionality. The S3 class and methods enhance the user experience by allowing for organized and specialized handling of the analysis results.</em></strong></p>
+<p><strong><em><code>-------------------------END OF THE FINAL PROJECT (THANK YOU!!!!)--------------------------------------------------------------------</code></em></strong></p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
